@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title><?= (isset($title)) ? $title : 'Auto CRUD'; ?></title>
 
   <!-- Google Font: Source Sans Pro -->
@@ -20,16 +21,10 @@
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
 
-       <!-- Left navbar links -->
+       <!-- Left navbar menu toggle -->
         <ul class="navbar-nav">
           <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-          </li>
-          <li class="nav-item d-none d-sm-inline-block">
-            <a href="/" class="nav-link">Dashboard</a>
-          </li>
-          <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">Users</a>
           </li>
         </ul>
 
@@ -90,7 +85,7 @@
 
 <!-- jQuery -->
 <script src="admin/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
+<!-- Bootstrap -->
 <script src="admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="admin/dist/js/adminlte.min.js"></script>
