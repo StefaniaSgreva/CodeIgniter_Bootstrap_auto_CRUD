@@ -46,15 +46,41 @@ class Users extends BaseController
 		$data['table'] = $this->crud->view($page, $per_page, $columns, $where, $order);
 		return view('admin/users/table', $data);
 	}
+
+	public function add(){
+		$data['form'] = $form = $this->crud->form();
+		$data['title'] = $this->crud->getAddTitle();
+
+		if(is_array($form) && isset($form['redirect']))
+			return redirect()->to($form['redirect']);
+
+		return view('admin/users/form', $data);
+	}
+
+	public function edit($id)
+	{
+		if(!$this->crud->current_values($id))
+			return redirect()->to($this->crud->getBase() . '/' . $this->crud->getTable());
+
+			$data['item_id'] = $id;
+		$data['form'] = $form = $this->crud->form();
+		$data['title'] = $this->crud->getEditTitle();
+
+		if (is_array($form) && isset($form['redirect']))
+			return redirect()->to($form['redirect']);
+		
+		return view('admin/users/form', $data);
+	}
+
+
 	protected function field_options()
 	{
 		$fields = [];
-		$field['u_id'] = ['label' => 'ID'];
-		$fields['u_firstname'] = ['label' => 'First Name', 'required' => true, 'helper' => 'Type your First name', 'class' => 'col-12 col-sm-6'];
-		$fields['u_lastname'] = ['label' =>'Last Name', 'required' => true, 'helper' => 'Type your Last name', 'class' => 'col-12 col-sm-6'];
-		$fields['u_email'] = ['label' => 'Email','required' => true, 'unique' => [true, 'u_email']];
-		$fields['u_status'] = ['label' => 'Status','required' => true,];
-		$fields['u_created_at'] = ['label' => 'Created at', 'only_edit' => true];
+
+		$fields['u_id'] = ['label' => 'ID'];
+		$fields['u_firstname'] = ['label' => 'First Name', 'required' => true, 'class' => 'col-12 col-sm-6'];
+		$fields['u_lastname'] = ['label' =>'Last Name', 'required' => true, 'class' => 'col-12 col-sm-6'];
+		$fields['u_email'] = ['label' => 'Email','required' => true,  'helper' => 'email@gmail.com', 'unique' => [true, 'u_email']];
 		$fields['u_password'] = ['label' => 'Password',
 		 'required' => true, 
 		 'only_add' => true,
@@ -62,8 +88,11 @@ class Users extends BaseController
 			'class' => 'col-12 col-sm-6',
 		 'confirm' => true, 
 		 'password_hash' => true];
+		$fields['u_status'] = ['label' => 'Status', 'only_edit' => true];
+		$fields['u_created_at'] = ['label' => 'Created at', 'type' => 'unset'];
 
 		return $fields;
 	}
+
 
 }
